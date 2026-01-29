@@ -76,7 +76,7 @@ function Map({ center, locations, setOpenFilters }) {
 
     /* -------------------- MAP EVENTS -------------------- */
     const handleMapMoveStart = () => {
-        setLoading(true);
+        // setLoading(true);
     };
 
     const handleMapIdle = () => {
@@ -88,7 +88,7 @@ function Map({ center, locations, setOpenFilters }) {
         clearTimeout(debounceRef.current);
         debounceRef.current = setTimeout(async () => {
             await sendViewportToApi(bounds);
-            setLoading(false);
+            // setLoading(false);
         }, 400);
     };
 
@@ -102,7 +102,7 @@ function Map({ center, locations, setOpenFilters }) {
         const loc = place.geometry.location;
         mapRef.current.panTo({ lat: loc.lat(), lng: loc.lng() });
         mapRef.current.setZoom(14);
-        setLoading(true);
+        // setLoading(true);
     };
 
     /* -------------------- CARD HOVER -------------------- */
@@ -234,7 +234,7 @@ function Map({ center, locations, setOpenFilters }) {
                     {loading && (
                         <div className="map-loading-fixed">
                             <div className="spinner" />
-                            <span className="loading-text">Loading properties</span>
+                            <span className="loading-text">Loading Properties</span>
                         </div>
                     )}
                 </GoogleMap>
