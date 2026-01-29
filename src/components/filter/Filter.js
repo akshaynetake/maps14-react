@@ -41,8 +41,8 @@ function Filters({ onChange, onClose }) {
         <div className="f-s-c-container">
             {/* PRICE */}
             <div className="filter-header">
-                <IconButton size="small" >
-                    <CloseIcon onClick={onClose}/>
+                <IconButton onClick={onClose} size="small" >
+                    <CloseIcon />
                 </IconButton>
             </div>
             <FilterSection title="Price Range">

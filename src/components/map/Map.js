@@ -34,6 +34,8 @@ const mapOptions = {
 
 function Map({ center, locations, setOpenFilters }) {
     const [hovered, setHovered] = useState(null);
+    const [mapBounds, setMapBounds] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     const [filters, setFilters] = useState({
         price: [],
@@ -42,12 +44,80 @@ function Map({ center, locations, setOpenFilters }) {
         type: [],
     });
 
-    const [mapBounds, setMapBounds] = useState(null);
-
     const mapRef = useRef(null);
     const autocompleteRef = useRef(null);
     const closeTimer = useRef(null);
+    const debounceRef = useRef(null);
 
+    /* -------------------- VIEWPORT UTILS -------------------- */
+    const extractBounds = (bounds) => {
+        if (!bounds) return null;
+
+        const ne = bounds.getNorthEast();
+        const sw = bounds.getSouthWest();
+
+        return {
+            north: ne.lat(),
+            east: ne.lng(),
+            south: sw.lat(),
+            west: sw.lng(),
+        };
+    };
+
+    const sendViewportToApi = async (bounds) => {
+        const viewport = extractBounds(bounds);
+        if (!viewport) return;
+
+        console.log("📍 Viewport payload:", viewport);
+
+        // 🔥 simulate API delay
+        await new Promise((res) => setTimeout(res, 1000));
+    };
+
+    /* -------------------- MAP EVENTS -------------------- */
+    const handleMapMoveStart = () => {
+        setLoading(true);
+    };
+
+    const handleMapIdle = () => {
+        if (!mapRef.current) return;
+
+        const bounds = mapRef.current.getBounds();
+        setMapBounds(bounds);
+
+        clearTimeout(debounceRef.current);
+        debounceRef.current = setTimeout(async () => {
+            await sendViewportToApi(bounds);
+            setLoading(false);
+        }, 400);
+    };
+
+    /* -------------------- SEARCH -------------------- */
+    const handlePlaceChanged = () => {
+        if (!autocompleteRef.current || !mapRef.current) return;
+
+        const place = autocompleteRef.current.getPlace();
+        if (!place?.geometry) return;
+
+        const loc = place.geometry.location;
+        mapRef.current.panTo({ lat: loc.lat(), lng: loc.lng() });
+        mapRef.current.setZoom(14);
+        setLoading(true);
+    };
+
+    /* -------------------- CARD HOVER -------------------- */
+    const openCard = (loc) => {
+        clearTimeout(closeTimer.current);
+        setHovered(loc);
+    };
+
+    const closeCard = () => {
+        closeTimer.current = setTimeout(() => {
+            setHovered(null);
+        }, 120);
+    };
+
+    /* -------------------- AUTOCOMPLETE FIX -------------------- */
     const syncPacWidth = () => {
         const input = document.getElementById("map-search-input");
         const pac = document.querySelector(".pac-container");
@@ -60,28 +130,7 @@ function Map({ center, locations, setOpenFilters }) {
         }
     };
 
-    const openCard = (loc) => {
-        clearTimeout(closeTimer.current);
-        setHovered(loc);
-    };
-
-    const closeCard = () => {
-        closeTimer.current = setTimeout(() => {
-            setHovered(null);
-        }, 120);
-    };
-
-    const handlePlaceChanged = () => {
-        if (!autocompleteRef.current || !mapRef.current) return;
-
-        const place = autocompleteRef.current.getPlace();
-        if (!place || !place.geometry) return;
-
-        const loc = place.geometry.location;
-        mapRef.current.panTo({ lat: loc.lat(), lng: loc.lng() });
-        mapRef.current.setZoom(14);
-    };
-
+    /* -------------------- FILTERED LOCATIONS -------------------- */
     const filteredLocations = useMemo(() => {
         return locations.filter((item) => {
             if (filters.price.length) {
@@ -124,6 +173,7 @@ function Map({ center, locations, setOpenFilters }) {
         });
     }, [filters, mapBounds, locations]);
 
+    /* -------------------- RENDER -------------------- */
     return (
         <div className="m-f-container">
             <div className="m-container">
@@ -154,11 +204,9 @@ function Map({ center, locations, setOpenFilters }) {
                         mapRef.current = map;
                         setMapBounds(map.getBounds());
                     }}
-                    onIdle={() => {
-                        if (mapRef.current) {
-                            setMapBounds(mapRef.current.getBounds());
-                        }
-                    }}
+                    onDragStart={handleMapMoveStart}
+                    onZoomChanged={handleMapMoveStart}
+                    onIdle={handleMapIdle}
                 >
                     {filteredLocations.map((loc) => (
                         <Marker
@@ -180,6 +228,14 @@ function Map({ center, locations, setOpenFilters }) {
                                 onLeave={closeCard}
                             />
                         </OverlayView>
+                    )}
+
+                    {/* 🔥 LOADING OVERLAY */}
+                    {loading && (
+                        <div className="map-loading-fixed">
+                            <div className="spinner" />
+                            <span className="loading-text">Loading properties</span>
+                        </div>
                     )}
                 </GoogleMap>
             </div>
