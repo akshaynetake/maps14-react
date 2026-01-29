@@ -1,0 +1,17 @@
+.MuiFormControlLabel-label {
+    font-size: 13px;
+    color: #4a4a4a;
+}
+
+.f-s-c-container {
+    padding: 8px 16px;
+    background: #ffff;
+    height: 100%
+}
+
+.filter-header {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  color: black;
+}

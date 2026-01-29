@@ -1,0 +1,167 @@
+[
+  {
+    "id": 1,
+    "lat": 19.076,
+    "lng": 72.8777,
+    "name": "Property 1",
+    "price": 4500,
+    "priceCr": 0.9,
+    "bhk": 2,
+    "carpet": 850,
+    "type": "residential"
+  },
+  {
+    "id": 2,
+    "lat": 19.086,
+    "lng": 72.8877,
+    "name": "Property 2",
+    "price": 6200,
+    "priceCr": 1.8,
+    "bhk": 3,
+    "carpet": 1400,
+    "type": "residential"
+  },
+  {
+    "id": 3,
+    "lat": 18.5204,
+    "lng": 73.8567,
+    "name": "Pune Property 1",
+    "price": 4500,
+    "priceCr": 0.7,
+    "bhk": 1,
+    "carpet": 650,
+    "type": "residential"
+  },
+  {
+    "id": 4,
+    "lat": 18.5642,
+    "lng": 73.7769,
+    "name": "Pune Property 2",
+    "price": 6200,
+    "priceCr": 2.4,
+    "bhk": 3,
+    "carpet": 1800,
+    "type": "commercial"
+  },
+  {
+    "id": 5,
+    "lat": 18.5018,
+    "lng": 73.8636,
+    "name": "Property 5",
+    "price": 5200,
+    "priceCr": 1.2,
+    "bhk": 2,
+    "carpet": 1100,
+    "type": "residential"
+  },
+  {
+    "id": 6,
+    "lat": 18.5793,
+    "lng": 73.9078,
+    "name": "Property 6",
+    "price": 7100,
+    "priceCr": 5.8,
+    "bhk": 4,
+    "carpet": 3200,
+    "type": "commercial"
+  },
+  {
+    "id": 7,
+    "lat": 26.9124,
+    "lng": 75.7873,
+    "name": "Jaipur Property 1",
+    "price": 4800,
+    "priceCr": 0.6,
+    "bhk": 2,
+    "carpet": 900,
+    "type": "residential"
+  },
+  {
+    "id": 8,
+    "lat": 26.93,
+    "lng": 75.82,
+    "name": "Jaipur Property 2",
+    "price": 5600,
+    "priceCr": 1.1,
+    "bhk": 3,
+    "carpet": 1600,
+    "type": "residential"
+  },
+  {
+    "id": 9,
+    "lat": 28.4595,
+    "lng": 77.0266,
+    "name": "Gurgaon Property 1",
+    "price": 6200,
+    "priceCr": 2.8,
+    "bhk": 3,
+    "carpet": 1900,
+    "type": "commercial"
+  },
+  {
+    "id": 10,
+    "lat": 28.48,
+    "lng": 77.08,
+    "name": "Gurgaon Property 2",
+    "price": 7100,
+    "priceCr": 6.5,
+    "bhk": 4,
+    "carpet": 4200,
+    "type": "commercial"
+  },
+  {
+    "id": 11,
+    "lat": 22.5726,
+    "lng": 88.3639,
+    "name": "Kolkata Property 1",
+    "price": 4300,
+    "priceCr": 0.5,
+    "bhk": 1,
+    "carpet": 700,
+    "type": "residential"
+  },
+  {
+    "id": 12,
+    "lat": 22.59,
+    "lng": 88.4,
+    "name": "Kolkata Property 2",
+    "price": 5100,
+    "priceCr": 1.4,
+    "bhk": 2,
+    "carpet": 1200,
+    "type": "residential"
+  },
+  {
+    "id": 23,
+    "lat": 12.9716,
+    "lng": 77.5946,
+    "name": "Bangalore Property 1",
+    "price": 5200,
+    "priceCr": 1.5,
+    "bhk": 2,
+    "carpet": 1150,
+    "type": "residential"
+  },
+  {
+    "id": 24,
+    "lat": 12.9850,
+    "lng": 77.6050,
+    "name": "Bangalore Property 2",
+    "price": 6100,
+    "priceCr": 2.1,
+    "bhk": 3,
+    "carpet": 1450,
+    "type": "residential"
+  },
+  {
+    "id": 25,
+    "lat": 12.9600,
+    "lng": 77.5800,
+    "name": "Bangalore Property 3",
+    "price": 4800,
+    "priceCr": 0.9,
+    "bhk": 1,
+    "carpet": 820,
+    "type": "residential"
+  }
+]
